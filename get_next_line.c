@@ -36,11 +36,13 @@ char	*get_next_line(int	fd)
 		main_buffer = temp;
 	}
 	line = extract_line(main_buffer);
+	printf("line extracted %s\n", line);
 	if (!line)
 		return (free(main_buffer), NULL);
 	temp = extract_remaining(main_buffer);
 	free(main_buffer);
 	main_buffer = temp;
+	printf("main_buffer %s\n", main_buffer);
 	return (line);
 }
 
@@ -56,14 +58,19 @@ char	*read_file(char *buffer, int	fd)
 	while (bytes_read > 0) // 0 EOF & -1  reading error
 	{
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
+		printf("bytes_read :%ld\n", bytes_read);
 		if (bytes_read <= 0) 
 			return (free(read_buffer), NULL);
 		read_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, read_buffer);
+		printf("buffer after join: %s\n", buffer);
 		if (!buffer)
 			return (free(buffer), free(read_buffer), NULL);
 		if (ft_strchr(buffer, '\n'))
+		{
+			printf("new line found !!!\n");
 			break;
+		}
 	}
 	free(read_buffer);
 	return (buffer);

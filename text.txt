@@ -1,2 +1,7 @@
-This is the first line.
-This is the second line.
+This first line.
+@
+Second line.
+nothing here ""
+find .
+
+after new line.
