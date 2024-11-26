@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:43:27 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 14:36:19 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/26 17:29:40 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdint.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 8
+# define BUFFER_SIZE 5
 #endif
 
 char	*get_next_line(int	fd);
@@ -29,6 +29,7 @@ char	*ft_strchr(const char *s, int c);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:31:12 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 14:35:56 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/26 17:29:27 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substr[i] = '\0';
 	return (substr);
+}
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	char	*dup;
+	size_t	i;
+
+	i = 0;
+	len = ft_strlen(s);
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

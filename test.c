@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:37:33 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 14:53:56 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:56:51 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 			return (free(nextline), -1);
 		}
 		count++;
-		printf("[%d]:%s\n", count, nextline);
+		printf("return line [%d]:%s\n", count, nextline);
 		free(nextline);	
 	}
 	close(fd);
