@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:37:33 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/25 17:25:36 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/26 14:53:56 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 int	main(void)
 {
-	char	*nextline = NULL;
-	int	fd;
+	char	*nextline;
+	int		fd;
+	int		count;
 
 	// Create an open file description that refers to a file and 
 	// a file descriptor that refers to that open file description
@@ -27,23 +28,21 @@ int	main(void)
 		printf("Error! Could not open file\n");
 		exit (-1);
 	}
+	count = 0;
 	while (nextline)
 	{
 		nextline = get_next_line(fd);
-		// if (!nextline)
-		// 	break ;
+		if (!nextline)
+			break ;
 		if (!nextline)
 		{
 			printf("Error! Could not get line\n");
-			// free(nextline);
-			return (-1);
+			return (free(nextline), -1);
 		}
-		printf("%s\n", nextline);
-		free(nextline);
-		
+		count++;
+		printf("[%d]:%s\n", count, nextline);
+		free(nextline);	
 	}
-	// free(nextline);
 	close(fd);
 	return (0);
-	
 }
