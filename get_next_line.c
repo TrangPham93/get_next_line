@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/25 17:39:29 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/26 10:14:55 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*get_next_line(int	fd)
 		
 	}
 	// buffer[bytes_read] = '\0';
-	// free(buffer);
 	return (buffer);
 }
 
