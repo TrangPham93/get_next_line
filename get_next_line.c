@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 17:32:50 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/27 11:57:33 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ char	*get_next_line(int	fd)
 	{
 		temp = read_file(main_buffer, fd);
 		if (!temp)
+		{
+			printf("reading error\n");
 			return (free(main_buffer), NULL);
+		}
 		free(main_buffer);
 		main_buffer = temp;
 	}
@@ -56,16 +59,18 @@ char	*read_file(char *buffer, int	fd)
 	read_buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!read_buffer)
 		return (NULL);
-	bytes_read = 1;
-	while (bytes_read > 0) // 0 EOF & -1  reading error
+	bytes_read = 0;
+	while (bytes_read >= 0) // 0 EOF & -1  reading error
 	{
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
 		printf("bytes_read :%ld\n", bytes_read);
+		if (bytes_read == 0) // problem when bytes_read = 0, what to do?
+			break ;
 		read_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, read_buffer);
 		printf("buffer after join: %s\n", buffer);
 		if (!buffer)
-			return (free(buffer), free(read_buffer), NULL);
+			return (free(read_buffer), NULL);
 		if (ft_strchr(buffer, '\n'))
 		{
 			printf("new line found !!!\n");
@@ -74,8 +79,6 @@ char	*read_file(char *buffer, int	fd)
 	}
 	if (bytes_read == -1) 
 		return (free(read_buffer), NULL);
-	// if (bytes_read == 0) // problem when bytes_read = 0, what to do?
-	// 	return (buffer);
 	free(read_buffer);
 	return (buffer);
 }
@@ -87,8 +90,6 @@ char	*extract_line(char	*buffer)
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	// if (i == 0)
-	// 	return (buffer);
 	line = ft_substr(buffer, 0, i);
 	return (line);
 }

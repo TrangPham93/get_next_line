@@ -1,7 +1,2 @@
 This first line.
 @
-Second line.
-Nothing here ""
-Find .
-
-After new line.

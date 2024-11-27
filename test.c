@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:37:33 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 15:56:51 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/27 11:18:00 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	main(void)
 		exit (-1);
 	}
 	count = 0;
-	while (nextline)
+	while (1)
 	{
 		nextline = get_next_line(fd);
-		if (!nextline)
-			break ;
+		// if (!nextline)
+		// 	break ;
 		if (!nextline)
 		{
 			printf("Error! Could not get line\n");
