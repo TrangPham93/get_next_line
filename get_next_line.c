@@ -35,8 +35,10 @@ char	*get_next_line(int	fd)
 		free(main_buffer);
 		main_buffer = temp;
 	}
+	else
+		printf("there is still newline in buffer \n");
 	line = extract_line(main_buffer);
-	printf("line extracted %s\n", line);
+	printf("line extracted :%s\n", line);
 	if (!line)
 		return (free(main_buffer), NULL);
 	temp = extract_remaining(main_buffer);
@@ -59,8 +61,6 @@ char	*read_file(char *buffer, int	fd)
 	{
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
 		printf("bytes_read :%ld\n", bytes_read);
-		if (bytes_read <= 0) 
-			return (free(read_buffer), NULL);
 		read_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, read_buffer);
 		printf("buffer after join: %s\n", buffer);
@@ -72,6 +72,10 @@ char	*read_file(char *buffer, int	fd)
 			break;
 		}
 	}
+	if (bytes_read == -1) 
+		return (free(read_buffer), NULL);
+	// if (bytes_read == 0) // problem when bytes_read = 0, what to do?
+	// 	return (buffer);
 	free(read_buffer);
 	return (buffer);
 }
@@ -83,8 +87,8 @@ char	*extract_line(char	*buffer)
 	i = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	if (i == 0)
-		return (buffer);
+	// if (i == 0)
+	// 	return (buffer);
 	line = ft_substr(buffer, 0, i);
 	return (line);
 }

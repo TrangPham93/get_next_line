@@ -1,7 +1,7 @@
 This first line.
 @
 Second line.
-nothing here ""
-find .
+Nothing here ""
+Find .
 
-after new line.
+After new line.
