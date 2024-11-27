@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
-
+// test for no newline at all and test for call the wrong fd not exist
 char *read_file(char *buffer, int	fd);
 char	*extract_line(char	*buffer);
 char	*extract_remaining(char *buffer);
@@ -23,6 +23,8 @@ char	*get_next_line(int	fd)
 	char	*line;
 	char	*temp;
 	
+	// if (fd < 0 || BUFFER_SIZE <= 0)
+    //     return (NULL);
 	if (!main_buffer)
 		main_buffer = ft_calloc(1, sizeof(char));
 	if (!main_buffer) // EOF, reading error or calloc fail
@@ -35,11 +37,17 @@ char	*get_next_line(int	fd)
 			printf("reading error\n");
 			return (free(main_buffer), NULL);
 		}
-		free(main_buffer);
+		// free(main_buffer);
 		main_buffer = temp;
 	}
 	else
 		printf("there is still newline in buffer \n");
+	// if (!*main_buffer)
+	// {
+	// 	free(main_buffer);
+	// 	return (NULL);
+	// }
+
 	line = extract_line(main_buffer);
 	printf("line extracted :%s\n", line);
 	if (!line)
@@ -59,13 +67,15 @@ char	*read_file(char *buffer, int	fd)
 	read_buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!read_buffer)
 		return (NULL);
-	bytes_read = 0;
-	while (bytes_read >= 0) // 0 EOF & -1  reading error
+	bytes_read = 1;
+	while (bytes_read > 0) // 0 EOF & -1  reading error
 	{
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
+		if (bytes_read == -1) 
+			return (free(read_buffer), NULL);
 		printf("bytes_read :%ld\n", bytes_read);
-		if (bytes_read == 0) // problem when bytes_read = 0, what to do?
-			break ;
+		// if (bytes_read == 0) // problem when bytes_read = 0, what to do?
+		// 	break ;
 		read_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, read_buffer);
 		printf("buffer after join: %s\n", buffer);
@@ -76,9 +86,13 @@ char	*read_file(char *buffer, int	fd)
 			printf("new line found !!!\n");
 			break;
 		}
+		// if ( (bytes_read == 0 && *buffer))
+		// {
+		// 	printf("byte read is 0 \n");
+		// 	break ;
+		// }
 	}
-	if (bytes_read == -1) 
-		return (free(read_buffer), NULL);
+	
 	free(read_buffer);
 	return (buffer);
 }

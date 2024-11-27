@@ -36,8 +36,8 @@ int	main(void)
 		// 	break ;
 		if (!nextline)
 		{
-			printf("Error! Could not get line\n");
-			return (free(nextline), -1);
+			printf("Error! Could not get next line\n");
+			break ;
 		}
 		count++;
 		printf("return line [%d]:%s\n", count, nextline);
