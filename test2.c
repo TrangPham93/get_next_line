@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   test2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 12:37:33 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/27 11:18:00 by trpham           ###   ########.fr       */
+/*   Created: 2024/11/28 11:06:11 by trpham            #+#    #+#             */
+/*   Updated: 2024/11/28 11:15:25 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int	main(void)
+void	test2(void)
+
 {
 	char	*nextline;
 	int		fd;
@@ -22,7 +23,7 @@ int	main(void)
 
 	// Create an open file description that refers to a file and 
 	// a file descriptor that refers to that open file description
-	fd = open("text.txt", O_RDONLY);
+	fd = open("text2.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error! Could not open file\n");
@@ -36,7 +37,7 @@ int	main(void)
 		// 	break ;
 		if (!nextline)
 		{
-			printf("Error! Could not get next line\n");
+			printf("EOF! Could not get next line\n");
 			break ;
 		}
 		count++;
@@ -44,5 +45,4 @@ int	main(void)
 		free(nextline);	
 	}
 	close(fd);
-	return (0);
 }

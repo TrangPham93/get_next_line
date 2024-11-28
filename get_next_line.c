@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/27 11:57:33 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/28 10:59:01 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,28 @@ char	*get_next_line(int	fd)
 	{
 		temp = read_file(main_buffer, fd);
 		if (!temp)
-		{
-			printf("reading error\n");
 			return (free(main_buffer), NULL);
-		}
-		// free(main_buffer);
-		main_buffer = temp;
+		main_buffer = temp; // only update main_buffer if read_file succeeds
 	}
-	else
-		printf("there is still newline in buffer \n");
-	// if (!*main_buffer)
-	// {
-	// 	free(main_buffer);
-	// 	return (NULL);
-	// }
-
+	if (main_buffer == NULL || *main_buffer == '\0')
+		return (free(main_buffer), NULL);
 	line = extract_line(main_buffer);
-	printf("line extracted :%s\n", line);
 	if (!line)
 		return (free(main_buffer), NULL);
 	temp = extract_remaining(main_buffer);
+	if (!temp)
+		return (free(main_buffer), line);
 	free(main_buffer);
 	main_buffer = temp;
-	printf("main_buffer %s\n", main_buffer);
 	return (line);
 }
+// Here's why they appear to be treated similarly:
 
+//     For a null pointer: Dereferencing a null pointer is undefined behavior, 
+// but many implementations treat it as if it points to a null byte, 
+// making !*main_buffer evaluate to true.
+//     For an empty string: The first (and only) character of an empty string 
+// is the null terminator, so !*main_buffer also evaluates to true.
 char	*read_file(char *buffer, int	fd)
 {
 	ssize_t	bytes_read;
@@ -73,26 +69,18 @@ char	*read_file(char *buffer, int	fd)
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
 		if (bytes_read == -1) 
 			return (free(read_buffer), NULL);
-		printf("bytes_read :%ld\n", bytes_read);
-		// if (bytes_read == 0) // problem when bytes_read = 0, what to do?
-		// 	break ;
-		read_buffer[bytes_read] = '\0';
+		read_buffer[bytes_read] = '\0'; //
 		buffer = ft_strjoin(buffer, read_buffer);
-		printf("buffer after join: %s\n", buffer);
 		if (!buffer)
 			return (free(read_buffer), NULL);
 		if (ft_strchr(buffer, '\n'))
-		{
-			printf("new line found !!!\n");
 			break;
-		}
 		// if ( (bytes_read == 0 && *buffer))
 		// {
 		// 	printf("byte read is 0 \n");
 		// 	break ;
 		// }
 	}
-	
 	free(read_buffer);
 	return (buffer);
 }
@@ -118,3 +106,13 @@ char	*extract_remaining(char *buffer)
 	remaining = ft_strdup(newline_position + 1);
 	return (remaining);
 }
+
+	// else
+	// 	printf("there is still newline in buffer \n");
+	// printf("line extracted :%s\n", line);
+	// printf("main_buffer %s\n", main_buffer);
+	// printf("buffer after join: %s\n", buffer);
+	// printf("new line found !!!\n");
+		// printf("bytes_read :%ld\n", bytes_read);
+		// if (bytes_read == 0) // problem when bytes_read = 0, what to do?
+		// 	break ;
