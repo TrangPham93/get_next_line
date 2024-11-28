@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/28 13:33:15 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/28 13:49:05 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ char	*get_next_line(int fd)
 	{
 		temp = read_file(main_buffer, fd);
 		if (!temp)
-			return (free(main_buffer), NULL);
+			return (free(main_buffer), free(temp), NULL); //add free
 		main_buffer = temp;
 	}
 	if (main_buffer == NULL || *main_buffer == '\0')
 		return (free(main_buffer), NULL);
 	line = extract_line(main_buffer);
 	if (!line)
-		return (free(main_buffer), NULL);
+		return (free(main_buffer), free(line), NULL); // add free
 	temp = extract_remaining(main_buffer);
 	if (!temp)
-		return (free(main_buffer), line);
+		return (free(main_buffer), free(temp), line); // add free
 	free(main_buffer);
 	main_buffer = temp;
 	return (line);
@@ -76,7 +76,7 @@ char	*read_file(char *buffer, int fd)
 		read_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, read_buffer);
 		if (!buffer)
-			return (free(read_buffer), NULL);
+			return (free(read_buffer), free(buffer), NULL); // add free
 		if (ft_strchr(buffer, '\n'))
 			break ;
 		if (bytes_read == 0)
