@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:31:12 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 17:29:27 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/28 13:30:32 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	char	*p;
 	size_t	i;
-	
+
 	if (nmemb == 0 || size == 0)
 		return (malloc(0));
 	if (size > 0 && nmemb > SIZE_MAX / size)
@@ -57,6 +57,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s[s1_len + s2_len] = '\0';
 	return (s);
 }
+
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
@@ -69,6 +70,7 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	count;
@@ -81,6 +83,7 @@ size_t	ft_strlen(const char *s)
 	}
 	return (count);
 }
+
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			count;
@@ -99,6 +102,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
@@ -110,7 +114,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	s_len = ft_strlen(s);
 	if (start >= s_len)
-		return ("");
+		return (ft_strdup(""));
 	if (s_len - start <= len)
 		substr = malloc(s_len - start + 1);
 	else
@@ -125,6 +129,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr[i] = '\0';
 	return (substr);
 }
+
 char	*ft_strdup(const char *s)
 {
 	size_t	len;

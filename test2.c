@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:06:11 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/28 11:15:25 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/28 13:22:41 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 #include <stdio.h>
 
 void	test2(void)
-
 {
 	char	*nextline;
 	int		fd;
 	int		count;
 
-	// Create an open file description that refers to a file and 
-	// a file descriptor that refers to that open file description
 	fd = open("text2.txt", O_RDONLY);
 	if (fd == -1)
 	{
@@ -33,8 +30,6 @@ void	test2(void)
 	while (1)
 	{
 		nextline = get_next_line(fd);
-		// if (!nextline)
-		// 	break ;
 		if (!nextline)
 		{
 			printf("EOF! Could not get next line\n");
@@ -42,7 +37,7 @@ void	test2(void)
 		}
 		count++;
 		printf("return line [%d]:%s\n", count, nextline);
-		free(nextline);	
+		free(nextline);
 	}
 	close(fd);
 }

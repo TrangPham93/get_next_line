@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:07:59 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/28 11:16:45 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/28 13:31:27 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 
 void	test1(void);
 void	test2(void);
+void	test3(void);
 
 int	main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
-		printf("Input test number: \n");
+		printf("INPUT TEST NUMBER: \n");
 		return (1);
 	}
 	if (strcmp(argv[1], "1") == 0)
@@ -29,8 +30,8 @@ int	main(int argc, char *argv[])
 	else if (strcmp(argv[1], "2") == 0)
 		test2();
 	else if (strcmp(argv[1], "3") == 0)
-		test2();
+		test3();
 	else
-		printf("Invalid test number! \n");
+		printf("INVALID TEST NUMBER! \n");
 	return (0);
 }

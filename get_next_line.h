@@ -6,23 +6,23 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:43:27 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/26 17:29:40 by trpham           ###   ########.fr       */
+/*   Updated: 2024/11/28 13:29:31 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_GETNEXTLINE_H
-# define FT_GETNEXTLINE_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdint.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 5
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
-char	*get_next_line(int	fd);
-char	*read_file(char *buffer, int	fd);
+char	*get_next_line(int fd);
+char	*read_file(char *buffer, int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
@@ -32,4 +32,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);
 
 #endif
-
