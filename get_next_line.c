@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/28 16:27:57 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/01 10:17:36 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,17 @@ char	*get_next_line(int fd)
 	{
 		temp = read_file(main_buffer, fd);
 		if (!temp)
-			return (free(main_buffer), free(temp), NULL); //add free
-		free(main_buffer);
+			return (NULL);
 		main_buffer = temp;
 	}
 	if (main_buffer == NULL || *main_buffer == '\0')
-		return (free(main_buffer), NULL);
+		return ( NULL);
 	line = extract_line(main_buffer);
 	if (!line)
-		return (free(main_buffer), free(line), NULL); // add free
+		return (free(main_buffer), NULL); 
 	temp = extract_remaining(main_buffer);
 	if (!temp)
-		return (free(main_buffer), free(temp), line); // add free
+		return (free(main_buffer), line); 
 	free(main_buffer);
 	main_buffer = temp;
 	return (line);
@@ -64,20 +63,22 @@ char	*read_file(char *buffer, int fd)
 {
 	ssize_t	bytes_read;
 	char	*read_buffer;
+	char	*tem;
 
 	read_buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!read_buffer)
 		return (NULL);
-	bytes_read = 1;
-	while (bytes_read > 0)
+	while (1)
 	{
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (free(read_buffer), NULL);
 		read_buffer[bytes_read] = '\0';
-		buffer = ft_strjoin(buffer, read_buffer);
-		if (!buffer)
-			return (free(read_buffer), free(buffer), NULL); // add free
+		tem = ft_strjoin(buffer, read_buffer);
+		if (!tem)
+			return (free(read_buffer), NULL);
+		free(buffer);
+		buffer = tem;
 		if (ft_strchr(buffer, '\n'))
 			break ;
 		if (bytes_read == 0)
