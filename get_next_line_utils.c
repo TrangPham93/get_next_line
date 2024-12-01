@@ -6,32 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:31:12 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/28 13:30:32 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/01 11:18:57 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	char	*p;
-	size_t	i;
-
-	if (nmemb == 0 || size == 0)
-		return (malloc(0));
-	if (size > 0 && nmemb > SIZE_MAX / size)
-		return (NULL);
-	p = malloc(nmemb * size);
-	if (!p)
-		return (NULL);
-	i = 0;
-	while (i < nmemb)
-	{
-		p[i] = 0;
-		i++;
-	}
-	return (p);
-}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -58,32 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (s);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if ((unsigned char)*s == (unsigned char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	count;
-
-	count = 0;
-	while (*s)
-	{
-		count++;
-		s++;
-	}
-	return (count);
-}
-
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			count;
@@ -103,31 +56,30 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
-	size_t	s_len;
-	char	*substr;
+	size_t	count;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-		return (ft_strdup(""));
-	if (s_len - start <= len)
-		substr = malloc(s_len - start + 1);
-	else
-		substr = malloc(len + 1);
-	if (!substr)
-		return (NULL);
-	while (i < len && s[start + i] != '\0')
+	count = 0;
+	while (*s)
 	{
-		substr[i] = s[start + i];
-		i++;
+		count++;
+		s++;
 	}
-	substr[i] = '\0';
-	return (substr);
+	return (count);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if ((unsigned char)*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
 char	*ft_strdup(const char *s)

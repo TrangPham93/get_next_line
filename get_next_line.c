@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/01 10:50:29 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/01 11:18:14 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (free(main_buffer), NULL);
 	if (!main_buffer)
-		main_buffer = ft_calloc(1, sizeof(char));
+	{
+		main_buffer = malloc(1);
+		main_buffer[0] = 0;
+	}
 	if (!main_buffer)
 		return (NULL);
 	if (!ft_strchr(main_buffer, '\n'))
@@ -65,7 +68,7 @@ char	*read_file(char *buffer, int fd)
 	char	*read_buffer;
 	char	*tem;
 
-	read_buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	read_buffer = malloc(BUFFER_SIZE + 1);
 	if (!read_buffer)
 		return (NULL);
 	while (1)
@@ -92,11 +95,21 @@ char	*extract_line(char	*buffer)
 {
 	char	*line;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	line = ft_substr(buffer, 0, i);
+	line = malloc(i + 1);
+	if (!line)
+		return (NULL);
+	while (j < i)
+	{
+		line[j] = buffer[j];
+		j++;
+	}
+	line[j] = '\0';
 	return (line);
 }
 
