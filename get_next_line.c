@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/01 10:17:36 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/01 10:50:29 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ char	*get_next_line(int fd)
 		main_buffer = temp;
 	}
 	if (main_buffer == NULL || *main_buffer == '\0')
-		return ( NULL);
+		return (NULL);
 	line = extract_line(main_buffer);
 	if (!line)
-		return (free(main_buffer), NULL); 
+		return (free(main_buffer), NULL);
 	temp = extract_remaining(main_buffer);
 	if (!temp)
-		return (free(main_buffer), line); 
+		return (free(main_buffer), line);
 	free(main_buffer);
 	main_buffer = temp;
 	return (line);
