@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/02 12:00:08 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/02 16:24:11 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,27 @@ char	*update_buffer(char **buffer, int fd);
 
 char	*get_next_line(int fd)
 {
-	static char	*main_buffer = NULL;
+	static char	*main_buffer;
 	char		*line;
 	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(main_buffer), NULL);
+		return (NULL);
 	if (!main_buffer)
-	{
-		main_buffer = malloc(1);
-		main_buffer[0] = 0;
-	}
+		main_buffer = ft_strdup("");
 	if (!main_buffer)
 		return (NULL);
 	update_buffer(&main_buffer, fd);
-	if (main_buffer == NULL || *main_buffer == '\0')
+	if (main_buffer == NULL)
 		return (NULL);
+	if(*main_buffer == '\0')
+		return (free(main_buffer), NULL);
 	line = extract_line(main_buffer);
 	if (!line)
-		return (free(main_buffer), NULL);
+		return (free(main_buffer), main_buffer = NULL, NULL);
 	temp = extract_remaining(main_buffer);
 	if (!temp)
-		return (free(main_buffer), line);
+		return (free(main_buffer), main_buffer = NULL, line);
 	free(main_buffer);
 	main_buffer = temp;
 	return (line);
@@ -66,7 +65,7 @@ char	*read_file(char *buffer, int fd)
 	char	*read_buffer;
 	char	*tem;
 
-	read_buffer = malloc(BUFFER_SIZE + 1);
+	read_buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!read_buffer)
 		return (NULL);
 	while (1)
@@ -77,7 +76,7 @@ char	*read_file(char *buffer, int fd)
 		read_buffer[bytes_read] = '\0';
 		tem = ft_strjoin(buffer, read_buffer);
 		if (!tem)
-			return (free(read_buffer), NULL);
+			return (free(read_buffer), free(tem), NULL);
 		free(buffer);
 		buffer = tem;
 		if (ft_strchr(buffer, '\n'))
@@ -118,7 +117,8 @@ char	*extract_remaining(char *buffer)
 
 	newline_position = ft_strchr(buffer, '\n');
 	if (!newline_position)
-		return (ft_strdup(""));
+		return (NULL);
 	remaining = ft_strdup(newline_position + 1);
 	return (remaining);
 }
+ 
