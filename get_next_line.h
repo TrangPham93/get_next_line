@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:43:27 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/02 09:20:33 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/02 12:01:13 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # endif
 
 char	*get_next_line(int fd);
+char	*read_file(char *buffer, int fd);
+char	*extract_line(char	*buffer);
+char	*extract_remaining(char *buffer);
+char	*update_buffer(char **buffer, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 void	*ft_memcpy(void *dest, const void *src, size_t n);

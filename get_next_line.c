@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/02 09:08:33 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/02 12:00:08 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ char	*extract_line(char	*buffer)
 	j = 0;
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	line = malloc(i + 1);
+	line = malloc(i + 2);
 	if (!line)
 		return (NULL);
-	while (j < i)
+	while (j <= i)
 	{
 		line[j] = buffer[j];
 		j++;
