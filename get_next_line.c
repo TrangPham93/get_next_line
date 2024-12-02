@@ -6,22 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/02 08:46:45 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/02 09:08:33 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-/* 
-
-Here's why they appear to be treated similarly:
-
-    For a null pointer: Dereferencing a null pointer is undefined behavior, 
-but many implementations treat it as if it points to a null byte, 
-making !*main_buffer evaluate to true.
-    For an empty string: The first (and only) character of an empty string 
-is the null terminator, so !*main_buffer also evaluates to true. 
-*/
 
 char	*read_file(char *buffer, int fd);
 char	*extract_line(char	*buffer);
