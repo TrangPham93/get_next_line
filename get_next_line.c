@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/01 11:18:14 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/02 08:46:45 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ is the null terminator, so !*main_buffer also evaluates to true.
 char	*read_file(char *buffer, int fd);
 char	*extract_line(char	*buffer);
 char	*extract_remaining(char *buffer);
+char	*update_buffer(char **buffer, int fd);
 
 char	*get_next_line(int fd)
 {
@@ -42,13 +43,7 @@ char	*get_next_line(int fd)
 	}
 	if (!main_buffer)
 		return (NULL);
-	if (!ft_strchr(main_buffer, '\n'))
-	{
-		temp = read_file(main_buffer, fd);
-		if (!temp)
-			return (NULL);
-		main_buffer = temp;
-	}
+	update_buffer(&main_buffer, fd);
 	if (main_buffer == NULL || *main_buffer == '\0')
 		return (NULL);
 	line = extract_line(main_buffer);
@@ -60,6 +55,20 @@ char	*get_next_line(int fd)
 	free(main_buffer);
 	main_buffer = temp;
 	return (line);
+}
+
+char	*update_buffer(char **buffer, int fd)
+{
+	char	*temp;
+
+	if (!ft_strchr(*buffer, '\n'))
+	{
+		temp = read_file(*buffer, fd);
+		if (!temp)
+			return (NULL);
+		*buffer = temp;
+	}
+	return (*buffer);
 }
 
 char	*read_file(char *buffer, int fd)
