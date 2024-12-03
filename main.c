@@ -6,13 +6,14 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:07:59 by trpham            #+#    #+#             */
-/*   Updated: 2024/11/28 16:10:12 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/03 10:23:12 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
 
 void	test1(void);
 void	test2(void);
