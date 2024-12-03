@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:14 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/03 14:18:15 by trpham           ###   ########.fr       */
+/*   Updated: 2024/12/03 16:00:15 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_next_line(int fd)
 	{
 		main_buffer = ft_strdup("");
 		if (!main_buffer)
-			return (NULL);	
+			return (NULL);
 	}
 	if (!update_buffer(&main_buffer, fd))
 		return (NULL);
@@ -73,11 +73,11 @@ char	*read_file(char *buffer, int fd)
 	{
 		bytes_read = read(fd, read_buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free(read_buffer), NULL);
+			return (free(read_buffer), read_buffer = NULL, NULL);
 		read_buffer[bytes_read] = '\0';
 		tem = ft_strjoin(buffer, read_buffer);
 		if (!tem)
-			return (free(read_buffer), free(tem), NULL);
+			return (free(read_buffer), read_buffer = NULL, NULL);
 		free(buffer);
 		buffer = tem;
 		if (ft_strchr(buffer, '\n'))
