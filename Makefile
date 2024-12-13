@@ -6,13 +6,13 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 13:25:31 by trpham            #+#    #+#              #
-#    Updated: 2024/11/22 13:41:57 by trpham           ###   ########.fr        #
+#    Updated: 2024/12/02 09:18:11 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = get_next_line.c \
 		get_next_line_utils.c
