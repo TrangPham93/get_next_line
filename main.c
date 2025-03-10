@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:07:59 by trpham            #+#    #+#             */
-/*   Updated: 2024/12/03 17:10:24 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/07 14:53:14 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ int	main(int argc, char *argv[])
 	count = 0;
 	while (count < 7)
 	{
-		nextline = get_next_line(fd);
+		if (count == 2)
+		{
+			nextline = NULL;
+			close(fd);
+		}
+		else
+			nextline = get_next_line(fd);
 		count++;
 		printf("return line [%d]:%s\n", count, nextline);
 		free(nextline);
