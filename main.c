@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:07:59 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/07 14:53:14 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/13 16:41:31 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,25 @@ int	main(int argc, char *argv[])
 		printf("Error! Could not open file\n");
 		exit (-1);
 	}
-	// while ((nextline = get_next_line(fd)) != NULL)
-	// {
-	// 	printf("%s", nextline);
-	// 	free(nextline);
-	// }
-	int		count;
-	count = 0;
-	while (count < 7)
+	while ((nextline = get_next_line(fd)) != NULL)
 	{
-		if (count == 2)
-		{
-			nextline = NULL;
-			close(fd);
-		}
-		else
-			nextline = get_next_line(fd);
-		count++;
-		printf("return line [%d]:%s\n", count, nextline);
+		printf("%s", nextline);
 		free(nextline);
 	}
+	// int		count;
+	// count = 0;
+	// while (count < 7)
+	// {
+	// 	if (count == 2)
+	// 	{
+	// 		nextline = NULL;
+	// 		close(fd);
+	// 	}
+	// 	else
+	// 		nextline = get_next_line(fd);
+	// 	count++;
+	// 	printf("return line [%d]:%s\n", count, nextline);
+	// 	free(nextline);
+	// }
 	close(fd);
 }
