@@ -23,7 +23,7 @@ Linux OS
    cd getNextLine
    ```
 #### 2. Compile the Project
-To compile both the mandatory and bonus
+
 ```bash 
 cc *.c 
 ```
